@@ -2,7 +2,6 @@
 #include<conio.h>
 #include<dos.h>
 #include<graphics.h>
-#include<stdlib.h>
 int initmouse();
 void showptr();
 void starting();
@@ -16,7 +15,7 @@ long double addnum(int);
 char opr;
 int a,b,r,i1,count,c,sq,newnum=1,d=0;
 union REGS i,o;
-void main()
+int main()
 {
   int driver=DETECT,mode;
   int q,p[12];
@@ -32,64 +31,37 @@ void main()
   initgraph(&driver,&mode,"C:\\Turboc3\\BGI");
 
   if(initmouse()==0)
-
   {
-
     printf("not");
-
     getch();
-
-    exit(0);
-
+    return(0);
   }
-
   starting();
   getch();
   cleardevice();
-  setfillstyle(HATCH_FILL,20);
-  bar(260,82,450,320);
-  bar(430,70,450,320);
-
+  settextstyle(1,0,2);
   setfillstyle(1,LIGHTGRAY);
   bar(236,82,432,300);
   setcolor(WHITE);
-  rectangle(238,50,430,80);
-  rectangle(237,49,431,81);
   rectangle(236,48,432,82);
-  c=240;
-
   d=100;
-
   s=0;
-
    for(a=0;a<4;a++)
-
-  {
-c=240;
-
-    for(b=0;b<4;b++)
-    {
-      setfillstyle(1,DARKGRAY);
-      bar(c,d,c+40,d+40);
-
-      setcolor(YELLOW);
-
-      outtextxy(c+10,d+14,inpu[a][b]);
-
-      c+=50;
-
-    }
-
+   {
+	c=240;
+	for(b=0;b<4;b++)
+	{
+	   setfillstyle(1,DARKGRAY);
+	   bar(c,d,c+40,d+40);
+	   setcolor(YELLOW);
+	   outtextxy(c+10,d+14,inpu[a][b]);
+	   c+=50;
+	   }
     d+=50;
-
-  }
-
+    }
   showptr();
-
   num=0;
-
   gotoxy(36,5);
-
   printf("%18.2Lf",num);
 
   count=0;
@@ -97,52 +69,29 @@ c=240;
 while(!kbhit())
 {
 
-  outtextxy(30,20,"Press any key to exit..");
-
+  outtextxy(30,400,"Press any key to exit..");
   i1=0;
-
   c=240;
-
   d=100;
-
   rectangle(0,0,638,478);
-
   getmousepos(&button,&x,&y);
-
   for(a=0;a<4;a++)
-
   {
-
     c=240;
-
     for(b=0;b<4;b++)
-
     {
-
       if((x>=c&&x<=c+40)&&(y>=d&&y<=d+40))
-
       {
-
        if((button&1)==1)
-
        {
-
-     while((button&1)==1)
-
-     {
-
-       setcolor(10);
-
-       rectangle(c,d,c+40,d+40);
-
-       rectangle(c-1,d-1,c+41,d+41);
-
-       rectangle(c-2,d-2,c+42,d+42);
-
-       break;
-
-     }
-
+	while((button&1)==1)
+	{
+	 setcolor(10);
+	 rectangle(c,d,c+40,d+40);
+	 rectangle(c-1,d-1,c+41,d+41);
+	 rectangle(c-2,d-2,c+42,d+42);
+	 break;
+	 }
      delay(100);
      setcolor(GREEN);
      rectangle(c,d,c+40,d+40);
@@ -325,6 +274,7 @@ while(!kbhit())
   getch();
   ending();
   getch();
+  return 0;
 }
 long double addnum(int getnum)
 {
@@ -372,51 +322,19 @@ void starting()
     maxx=getmaxx();
     maxy=getmaxy();
     rectangle(0,0,maxx,maxy);
-    aa=250;
-    bb=400;
-    cc=260;
-    for(dd=250;dd<350;dd+=20)
-    {
-       setfillstyle(1,2);
-       bar(dd,bb,cc,bb+10);
-       cc+=20;
-    }
-    aa=250;
-    bb=400;
-    cc=260;
-    while(!kbhit())
-    {
     setcolor(i);
-    settextstyle(4,HORIZ_DIR,5);
     setcolor(4);
-    settextstyle(1,0,4);
-    outtextxy(200,20,"Kalculator");
-     setcolor(3);
-    outtextxy(20,70,"ANKIT");
-    outtextxy(20,100,"ASIM");
-    outtextxy(20,130,"BIKESH");
-    outtextxy(20,160,"RAHUL");
-    outtextxy(20,200,"WELCOME");
-    settextstyle(1,0,2);
-    if((aa==350)&&(cc==360))
-    {
-      aa=250;
-      cc=260;
-      continue;
-    }
-    else
-    {
-    setcolor(6);
-    rectangle(aa,bb,cc,bb+10);
-    rectangle(aa-1,bb-1,cc+1,bb+11);
-    }
-    delay(300);
-    setcolor(WHITE);
-    rectangle(aa,bb,cc,bb+10);
-    rectangle(aa-1,bb-1,cc+1,bb+11);
-    aa+=20;
-    cc+=20;
-    }
+    settextstyle(1,0,5);
+    outtextxy(200,20,"WELCOME");
+    setcolor(5);
+    outtextxy(200,70,"Kalculator");
+    setcolor(2);
+    outtextxy(120,120,"Team Members:");
+    setcolor(3);
+    outtextxy(200,160,"ANKIT");
+    outtextxy(200,200,"ASIM");
+    outtextxy(200,240,"BIKESH");
+    outtextxy(200,280,"RAHUL");
 }
 void ending()
 {
