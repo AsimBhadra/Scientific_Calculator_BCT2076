@@ -2,17 +2,32 @@
 #include<graphics.h>
 #include<conio.h>
 #include<stdlib.h>
+#include<dos.h>
+
+int initmous();
+void showmouseptr();
+union REGS i,o;
 
 
 void main()
 {
 
 	int gd=DETECT,gm,errCode;
-	int user,i,j;
+	int user,i,j,status;
 	int a,b,c,d;
 
 	initgraph(&gd,&gm,"C:\\TURBOC3\\BGI");
 	errCode=graphresult();
+
+	status=initmouse();
+	if(status==0)
+	{
+		printf("Mouse not supported");
+	}
+	else
+	{
+		showmouseptr();
+	}
 	if (errCode!=grOk)
 	{
 		printf("Graphics error %s",grapherrormsg(errCode));
@@ -37,8 +52,6 @@ void main()
 
 		}
 	}
-
-	//placing texts
 	setcolor(WHITE);
 	outtextxy(177,420,"0");
 	outtextxy(237,420,".");
@@ -87,3 +100,20 @@ void main()
 
 
 }
+
+int initmouse()
+{
+	i.x.ax=0;
+	int86(0X33,&i,&o);
+	return(o.x.ax);
+}
+
+
+void showmouseptr()
+{
+	i.x.ax=1;
+	int86(0X33,&i,&o);
+}
+
+
+
