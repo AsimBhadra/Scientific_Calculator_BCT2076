@@ -207,6 +207,7 @@ int main()
 	result=sin(num);
 	gotoxy(36,5);
 	printf("%18.2Lf",result);
+	num=result;
 	break;
 
       case 'C':
@@ -214,6 +215,7 @@ int main()
 	result=cos(num);
 	gotoxy(36,5);
 	printf("%18.2Lf",result);
+	num=result;
 	break;
 
       case 'T':
@@ -221,14 +223,29 @@ int main()
 	result=tan(num);
 	gotoxy(36,5);
 	printf("%18.2Lf",result);
+	num=result;
 	break;
 
 	case 's':
 		result=sqrt(num);
 		gotoxy(36,5);
 		printf("%18.2Lf",result);
+		num=result;
 		break;
 
+	case 'r':
+		result=num*num*num;
+		gotoxy(36,5);
+		printf("%18.2Lf",result);
+		num=result;
+		break;
+
+	case 't':
+		result=num*num;
+		gotoxy(36,5);
+		printf("%18.2Lf",result);
+		num=result;
+		break;
 
      case '=':
 	 switch(opr)
